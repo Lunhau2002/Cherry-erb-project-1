@@ -14,3 +14,9 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bcre.settings')
 
 application = get_wsgi_application()
+
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('',views.index, name='index')
+]
