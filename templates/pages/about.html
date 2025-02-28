@@ -1,5 +1,5 @@
 {% extends 'base.html'%} {% load static %} {% block content %}
-
+<h1>About</h1>
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
@@ -20,8 +20,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            {% comment %} fix index.html {% endcomment %}
-            <a href="index.html"> <i class="fas fa-home"></i> Home</a>
+            <a href="{% url 'index' %}"> <i class="fas fa-home"></i> Home</a>
           </li>
           <li class="breadcrumb-item active">About</li>
         </ol>
@@ -38,6 +37,7 @@
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
             pariatur!
           </p>
+          {% comment %} fix image later {% endcomment %}
           <img src="{% static 'img/about.jpg' %}" alt="" />
           <p class="mt-4">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -77,8 +77,7 @@
       aperiam, unde aliquid at similique!
     </h4>
     <hr />
-    {% comment %} fix listings.html {% endcomment %}
-    <a href="listings.html" class="btn btn-secondary text-white btn-lg"
+    <a href="{% url 'listings' %}" class="btn btn-secondary text-white btn-lg"
       >View Our Featured Listings</a
     >
   </section>
@@ -135,6 +134,6 @@
     </div>
   </section>
 
-<h1>About</h1>
+
 {% endblock %}
 
