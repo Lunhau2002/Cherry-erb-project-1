@@ -39,7 +39,7 @@
           <div class="card-img-overlay">
             <h2>
               <span class="badge badge-secondary text-white"
-                >${{listing.price | intword }}</span
+                >${{listing.price | intword | intcomma}}</span
               >
             </h2>
           </div>
@@ -80,8 +80,7 @@
             </div>
             <hr />
             <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block"
-              >More Info</a
-            >
+              >More Info</a>
           </div>
         </div>
       </div>
@@ -97,43 +96,45 @@
       <div class="col-md-12">
         <!---django pagination--->
         {% if listings.has_other_pages %}
-        <ul class="pagination">
-          {% if listings.has_previous %}
-          <li class="page-item">
-            <a href="?page={{listings.previous_page_number}}" classs="page-link">&laquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <a class="page-link" href="#">&laquo;</a>
-          </li>
+          <ul class="pagination">
+            {% if listings.has_previous %}
+            <li class="page-item">
+              <a href="?page={{listings.previous_page_number}}" class="page-link">&laquo;</a>
+
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#">&laquo;</a>
+            </li>
+            {% endif %}
+            <!--for loop all the page number-->
+            {% for i in listings.paginator.page_range %}
+            <!-- if page number eq to current page then display the number and go nowhere-->
+            {% if listings.number == i %}
+            <li class="page-item active">
+              <a class="page-link">{{i}}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{i}}">{{i}}</a>
+            
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% if listings.has_next %}
+            <li class="page-item">
+              <a href="?page={{listings.next_page_number}}" class="page-link">&raquo;</a>
+
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#">&raquo;</a>
+            </li>
+            {% endif %}
+          </ul>
           {% endif %}
-          <!----for loop all the page nunber--->
-          {% for i in listings.paginator.page_range %}
-          <!---if page number eq to current page then display the number and go nowhere--->
-          {% if listings.number == i %}
-          <li class="page-item active">
-            <a class="page-link">{{i}}</a>
-          </li>
-          {% else %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{i}}">{{i}}</a>
-          </li>
-          {% endif %}
-          {% endfor %}
-          {% if listings.has_next %}
-          <li class="page-item">
-            <a href="?page={{listings.next_page_number}}" classs="page-link">&raquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <a class="page-link" href="#">&raquo;</a>
-          </li>
-          {% endif %}
-        </ul>
-        {% endif %}
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
 {% endblock %}
